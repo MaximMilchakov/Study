@@ -114,22 +114,21 @@ namespace Izh_04
         public static int FindingElementIndexBetweenEqualSums(double[] doubleArray)
         {
             int doubleArrayLength = doubleArray.Length;
-            decimal[] arrayOfSumsFromLeftToRight = new decimal[doubleArrayLength]; // decimal - чтобы исключить
-            decimal[] arrayOfSumsFromRightToLeft = new decimal[doubleArrayLength]; // машинный эпсилон
+            decimal[] arrayOfSums = new decimal[doubleArrayLength]; // decimal - чтобы исключить машинный эпсилон
 
             if (doubleArrayLength > 2)
             {
-                arrayOfSumsFromLeftToRight[0] = (decimal)doubleArray[0];
+                arrayOfSums[0] = (decimal)doubleArray[0];
                 for (int i = 1; i < doubleArrayLength - 1; i++)
-                    arrayOfSumsFromLeftToRight[i] = (decimal)doubleArray[i] + arrayOfSumsFromLeftToRight[i - 1];
+                    arrayOfSums[i] = (decimal)doubleArray[i] + arrayOfSums[i - 1];
 
-                arrayOfSumsFromRightToLeft[doubleArrayLength - 1] = (decimal)doubleArray[doubleArrayLength - 1];
+                arrayOfSums[doubleArrayLength - 1] = (decimal)doubleArray[doubleArrayLength - 1];
                 for (int i = doubleArrayLength - 2; i > 1; i--)
                 {
-                    if (arrayOfSumsFromLeftToRight[i - 1] == arrayOfSumsFromRightToLeft[i + 1])
+                    if (arrayOfSums[i - 1] == arrayOfSums[i + 1])
                         return i;
 
-                    arrayOfSumsFromRightToLeft[i] = (decimal)doubleArray[i] + arrayOfSumsFromRightToLeft[i + 1];
+                    arrayOfSums[i] = (decimal)doubleArray[i] + arrayOfSums[i + 1];
                 }
             }
 
